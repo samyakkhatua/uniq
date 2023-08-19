@@ -1,9 +1,10 @@
 import { Header } from "@/components/header";
 import { mustBeLoggedIn } from "@/lib/auth";
-import { stripe } from "@/lib/stripe";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+import {
+  createCheckoutLink,
+  createCustomerIfNull,
+  hasSubscription,
+} from "@/lib/stripe";
 import React from "react";
 
 export default async function DashboardLayout({
@@ -11,9 +12,8 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  await mustBeLoggedIn();
 
-    await mustBeLoggedIn();
-    
   return (
     <div className="">
       <Header />

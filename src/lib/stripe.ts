@@ -36,9 +36,11 @@ export async function createCheckoutLink(customer: string) {
       {
         price: "price_1NgpiqSDhI13eLY4yFZL8ssn",
       },
+      
     ],
+    mode: "subscription"
   });
-  return checkout.url
+  return checkout.url;
 }
 
 export async function createCustomerIfNull() {
@@ -63,5 +65,9 @@ export async function createCustomerIfNull() {
         },
       });
     }
+    const user2 = await prisma.user.findFirst({
+      where: { email: session.user?.email },
+    });
+    return user2?.stripe_customer_id;
   }
 }
