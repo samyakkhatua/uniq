@@ -1,4 +1,6 @@
 import { Header } from "@/components/header";
+import { mustBeLoggedIn } from "@/lib/auth";
+import { stripe } from "@/lib/stripe";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -9,13 +11,9 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
 
-  if (session) {
-    console.log("User is logged in!");
-  } else {
-    await redirect('/api/auth/signin');
-  }
+    await mustBeLoggedIn();
+    
   return (
     <div className="">
       <Header />
