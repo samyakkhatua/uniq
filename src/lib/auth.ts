@@ -6,7 +6,7 @@ export async function mustBeLoggedIn() {
   const session = await getServerSession(authOptions);
 
   if (session) {
-    console.log("User is logged in!");
+    // console.log("User is logged in!");
   } else {
     await redirect("/api/auth/signin");
   }

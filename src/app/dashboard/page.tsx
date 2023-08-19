@@ -15,6 +15,8 @@ export default async function Page() {
 
       <h5>Dashboard</h5>
 
+      <Link href="/dashboard/billing"> Billing </Link>
+
       {hasSubsciption ? (
         <div className="rounded-md px-4 py-2 bg-emerald-400 font-medium text-white">
             You have an subscription!
