@@ -9,6 +9,7 @@ import Link from "next/link";
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import HowToUse from "@/components/howToUse";
 const prisma = new PrismaClient();
 
 export default async function Page() {
@@ -57,6 +58,8 @@ export default async function Page() {
           <div className="rounded-md px-4 py-2 bg-emerald-400 font-medium text-white">
             You have an subscription!
           </div>
+          
+          <HowToUse />
 
           <div className="divide-y divide-zinc-200 border border-zinc-200 rounded-md">
             <p className="text-sm text-black px-6 py-4 font-medium">

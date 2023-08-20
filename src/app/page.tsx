@@ -1,5 +1,6 @@
 import { Header } from "@/components/header";
-import Image from "next/image";
+import HowToUse from "@/components/howToUse";
+// import Image from "next/image";
 
 export default function Home() {
   return (
@@ -25,7 +26,7 @@ export default function Home() {
           </div>
 
           <h2 className="text-xl font-semibold mb-3">What is a UUID?</h2>
-          <p className="text-gray-600 mb-6">
+          <p id="features" className="text-gray-600 mb-6">
             A UUID (Universally Unique Identifier) is a 128-bit identifier
             that's unique across the globe. It's commonly used in various
             applications to ensure data integrity, traceability, and uniqueness.
@@ -81,22 +82,9 @@ export default function Home() {
             </li>
           </ul>
 
-          <div className="flex justify-between mb-6">
-            <a
-              href="#"
-              className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full text-center"
-            >
-              Get Started
-            </a>
-            <a
-              href="#"
-              className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-full text-center"
-            >
-              Explore Plans
-            </a>
-          </div>
+          <HowToUse />
 
-          <p className="text-center text-gray-500">
+          <p className="mt-24 text-center text-gray-500">
             Join our growing community of developers and businesses using our
             UUID Generator API to enhance their applications. Start generating
             unique IDs today!
