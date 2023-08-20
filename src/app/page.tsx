@@ -1,6 +1,6 @@
 import { Header } from "@/components/header";
 import HowToUse from "@/components/howToUse";
-// import Image from "next/image";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -21,7 +21,12 @@ export default function Home() {
               </p>
             </div>
             <div>
-              <img className="" src="/images/uniq_logo.png" alt="Uniq_logo" />
+              <Image
+                src={"/images/uniq_logo.png"}
+                alt="Uniq_logo"
+                width={800}
+                height={500}
+              />
             </div>
           </div>
 
