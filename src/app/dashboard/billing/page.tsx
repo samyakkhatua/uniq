@@ -27,7 +27,7 @@ export default function Page() {
 
   return (
     <>
-      <h3>Billing</h3>
+      <h3 className="text-4xl font-bold tracking-tight pt-4 pb-6">Billing</h3>
 
       <div className={`p-4 rounded ${bgColorClass}`}>
         <h1 className={`text-xl font-semibold ${textColorClass}`}>

@@ -48,17 +48,24 @@ export default async function Page() {
   }
 
   return (
-    <main>
-      <h5>Dashboard</h5>
+    <main className="mb-6">
+      <h5 className="text-4xl font-bold tracking-tight pt-4 pb-6">Dashboard</h5>
 
-      <Link href="/dashboard/billing"> Billing </Link>
+      <Link
+        href="/dashboard/billing"
+        className=" text-lg text-black hover:opacity-90 pb-6"
+      >
+        <p className="">
+          Billing<span aria-hidden="true">→</span>
+        </p>
+      </Link>
 
       {hasSubsciption ? (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 pt-2">
           <div className="rounded-md px-4 py-2 bg-emerald-400 font-medium text-white">
-            You have an subscription!
+            You have an active subscription!
           </div>
-          
+
           <HowToUse />
 
           <div className="divide-y divide-zinc-200 border border-zinc-200 rounded-md">
@@ -101,12 +108,12 @@ export default async function Page() {
         </div>
       ) : (
         <>
-          <div className="min-h-[60h] grid place-items-center rounded-lg px-6 py-10 bg-slate-200">
+          <div className="min-h-[60h] grid place-items-center rounded-lg px-6 py-10 bg-slate-200 rounded-md px-4 py-2 bg-emerald-400 font-medium text-white">
             <Link
               href={String(checkoutLink)}
               className="font-medium text-base hover:underline"
             >
-              You have no subscription, checkout Now!!!
+              You have no active subscription, checkout Now!!!
             </Link>
           </div>
         </>
