@@ -89,6 +89,9 @@ export default async function Page() {
                 <p className="text-sm font-mono text-zinc-800 px-6 py-4">
                   {item.created.toDateString()}
                 </p>
+                <p className="text-sm font-mono text-zinc-800 px-6 py-4">
+                  {item.created.toTimeString()}
+                </p>
               </div>
             ))}
           </div>
