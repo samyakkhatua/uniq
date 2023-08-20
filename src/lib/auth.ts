@@ -7,7 +7,9 @@ export async function mustBeLoggedIn() {
 
   if (session) {
     // console.log("User is logged in!");
+    return true
   } else {
+    return false
     await redirect("/api/auth/signin");
   }
 }
