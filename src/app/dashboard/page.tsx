@@ -2,6 +2,7 @@ import {
   createCheckoutLink,
   createCustomerIfNull,
   hasSubscription,
+  stripe,
 } from "@/lib/stripe";
 import Link from "next/link";
 
@@ -22,6 +23,29 @@ export default async function Page() {
     },
   });
 
+  const top10Recentlogs = await prisma.log.findMany({
+    where: {
+      userId: user?.id,
+    },
+    orderBy: {
+      created: "desc",
+    },
+    take: 10,
+  });
+
+  let current_usage = 0;
+
+  if (hasSubsciption) {
+    const subscriptions = await stripe.subscriptions.list({
+      customer: String(user?.stripe_customer_id),
+    });
+    const invoice = await stripe.invoices.retrieveUpcoming({
+      subscription: subscriptions.data.at(0)?.id,
+    });
+
+    current_usage = invoice.amount_due;
+  }
+
   return (
     <main>
       <h5>Dashboard</h5>
@@ -35,8 +59,38 @@ export default async function Page() {
           </div>
 
           <div className="divide-y divide-zinc-200 border border-zinc-200 rounded-md">
+            <p className="text-sm text-black px-6 py-4 font-medium">
+              Current Usage
+            </p>
+            <p className="text-sm font-mono text-zinc-800 px-6 py-4">
+              {current_usage / 100}
+            </p>
+          </div>
+
+          <div className="divide-y divide-zinc-200 border border-zinc-200 rounded-md">
             <p className="text-sm text-black px-6 py-4 font-medium">API Key</p>
-            <p className="text-sm font-mono text-zinc-800 px-6 py-8">{user?.api_key}</p>
+            <p className="text-sm font-mono text-zinc-800 px-6 py-8">
+              {user?.api_key}
+            </p>
+          </div>
+
+          <div className="divide-y divide-zinc-200 border border-zinc-200 rounded-md">
+            <p className="text-sm text-black px-6 py-4 font-medium">
+              Log Events
+            </p>
+            {top10Recentlogs.map((item, index) => (
+              <div className="flex items-center gap-4" key={index}>
+                <p className="text-sm font-mono text-zinc-800 px-6 py-4">
+                  {item.method}
+                </p>
+                <p className="text-sm font-mono text-zinc-800 px-6 py-4">
+                  {item.status}
+                </p>
+                <p className="text-sm font-mono text-zinc-800 px-6 py-4">
+                  {item.created.toDateString()}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       ) : (
