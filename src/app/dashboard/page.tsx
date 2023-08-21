@@ -10,11 +10,17 @@ import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import HowToUse from "@/components/howToUse";
+import { redirect } from "next/navigation";
 const prisma = new PrismaClient();
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
   const customer = await createCustomerIfNull();
+
+  if (!customer) {
+    redirect("/api/auth/signin");
+  }
+
   const hasSubsciption = await hasSubscription();
   const checkoutLink = await createCheckoutLink(String(customer));
 
