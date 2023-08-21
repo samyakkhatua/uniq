@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function HowToUse() {
+interface HowToUseProps {
+  api_key: string | null | undefined;
+}
+
+const HowToUse: React.FC<HowToUseProps> = ({ api_key }) => {
   return (
     <div className="mt-8 border-t pt-6">
       <h2 className="text-xl font-semibold mb-3">
@@ -10,12 +14,20 @@ export default function HowToUse() {
         <li>Sign up and get your API key from our website.</li>
         <li>
           Make a GET request to the following URL using your API key:
-          <div className="bg-gray-100 p-2 rounded-md">
-            {"http://localhost:3000/api/endpoint?api_key=YOUR_API_KEY"}
-          </div>
+          {api_key ? (
+            <div className="bg-gray-100 p-2 rounded-md">
+              {`http://localhost:3000/api/endpoint?api_key=${api_key}`}
+            </div>
+          ) : (
+            <div className="bg-gray-100 p-2 rounded-md">
+              {`http://localhost:3000/api/endpoint?api_key=YOUR_API_KEY`}
+            </div>
+          )}
         </li>
         <li>Receive a unique UUID in the response.</li>
       </ol>
     </div>
   );
-}
+};
+
+export default HowToUse;

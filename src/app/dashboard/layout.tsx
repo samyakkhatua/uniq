@@ -5,6 +5,7 @@ import {
   createCustomerIfNull,
   hasSubscription,
 } from "@/lib/stripe";
+import { redirect } from "next/navigation";
 import React from "react";
 
 export default async function DashboardLayout({
@@ -12,7 +13,11 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  await mustBeLoggedIn();
+  const logginStatus = await mustBeLoggedIn();
+
+  if (!logginStatus) {
+    redirect("/api/auth/signin");
+  }
 
   return (
     <div className="">

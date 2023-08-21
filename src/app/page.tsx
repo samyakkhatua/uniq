@@ -2,7 +2,14 @@ import { Header } from "@/components/header";
 import HowToUse from "@/components/howToUse";
 import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
+
+  // const user = await prisma.user.findFirst({
+  //   where: {
+  //     email: session?.user?.email,
+  //   },
+  // });
+
   return (
     <main className="">
       <Header />
@@ -87,7 +94,7 @@ export default function Home() {
             </li>
           </ul>
 
-          <HowToUse />
+          <HowToUse api_key={null} />
 
           <p className="mt-24 text-center text-gray-500">
             Join our growing community of developers and businesses using our

@@ -10,17 +10,11 @@ import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import HowToUse from "@/components/howToUse";
-import { redirect } from "next/navigation";
 const prisma = new PrismaClient();
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
   const customer = await createCustomerIfNull();
-
-  if (!customer) {
-    redirect("/api/auth/signin");
-  }
-
   const hasSubsciption = await hasSubscription();
   const checkoutLink = await createCheckoutLink(String(customer));
 
@@ -61,7 +55,7 @@ export default async function Page() {
         href="/dashboard/billing"
         className=" text-lg text-black hover:opacity-90 pb-6"
       >
-        <p className="">
+        <p className="mb-2">
           Billing<span aria-hidden="true">→</span>
         </p>
       </Link>
@@ -72,7 +66,7 @@ export default async function Page() {
             You have an active subscription!
           </div>
 
-          <HowToUse />
+          <HowToUse api_key={user?.api_key} />
 
           <div className="divide-y divide-zinc-200 border border-zinc-200 rounded-md">
             <p className="text-sm text-black px-6 py-4 font-medium">
@@ -114,7 +108,7 @@ export default async function Page() {
         </div>
       ) : (
         <>
-          <div className="min-h-[60h] grid place-items-center rounded-lg px-6 py-10 bg-slate-200 rounded-md px-4 py-2 bg-emerald-400 font-medium text-white">
+          <div className="min-h-[60h] grid place-items-center rounded-lg px-6 py-10 bg-slate-200 font-medium">
             <Link
               href={String(checkoutLink)}
               className="font-medium text-base hover:underline"
