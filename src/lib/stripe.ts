@@ -30,8 +30,8 @@ export async function hasSubscription() {
 
 export async function createCheckoutLink(customer: string) {
   const checkout = await stripe.checkout.sessions.create({
-    success_url: `${process.env.API_URL}/dashboard/billing?success=true`,
-    cancel_url: `${process.env.API_URL}/dashboard/billing?success=false`,
+    success_url: `${process.env.APP_URL}/dashboard/billing?success=true`,
+    cancel_url: `${process.env.APP_URL}/dashboard/billing?success=false`,
     customer: customer,
     line_items: [
       {

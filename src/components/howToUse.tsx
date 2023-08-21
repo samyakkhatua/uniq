@@ -16,11 +16,11 @@ const HowToUse: React.FC<HowToUseProps> = ({ api_key }) => {
           Make a GET request to the following URL using your API key:
           {api_key ? (
             <div className="bg-gray-100 p-2 rounded-md">
-              {`http://localhost:3000/api/endpoint?api_key=${api_key}`}
+              {`${process.env.APP_URL}/api/endpoint?api_key=${api_key}`}
             </div>
           ) : (
             <div className="bg-gray-100 p-2 rounded-md">
-              {`http://localhost:3000/api/endpoint?api_key=YOUR_API_KEY`}
+              {`${process.env.APP_URL}/api/endpoint?api_key=YOUR_API_KEY`}
             </div>
           )}
         </li>
